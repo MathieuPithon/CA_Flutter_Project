@@ -22,23 +22,23 @@ serait un plus.
   - Descriptif des fonctionnalités
   - Descriptif des API utilisées
 ### Besoins :
-Saisir les endroits visités : dates, lieux, commentaires, photos, météo, ...
-Voir mes lieux visités
-Rechercher lieux
-Noter les lieux
-Voir les lieux les mieux notés
-...
+- Saisir les endroits visités : dates, lieux, commentaires, photos, météo, ...
+- Voir mes lieux visités
+- Rechercher lieux
+- Noter les lieux
+- Voir les lieux les mieux notés
+- ...
 
 ### Notation :
-Fonctionnalités présentes
-Qualité UI / design
-Architecture de l’application
-Qualité du code
-Présence de tests
+- Fonctionnalités présentes
+- Qualité UI / design
+- Architecture de l’application
+- Qualité du code
+- Présence de tests
 
 ### Informations complémentaires :
-Vous êtes libres d’utiliser des packages
-Vous pouvez utilisez du stockage local, un backend, des API, Firebase, ...
-Vous pouvez utiliser des ressources libres de droit (images, design, ...)
-Attention : pas de copier/coller de projet open source !
-Tout plagiat sera sanctionné dans la note
+- Vous êtes libres d’utiliser des packages
+- Vous pouvez utilisez du stockage local, un backend, des API, Firebase, ...
+- Vous pouvez utiliser des ressources libres de droit (images, design, ...)
+- Attention : pas de copier/coller de projet open source !
+- Tout plagiat sera sanctionné dans la note
