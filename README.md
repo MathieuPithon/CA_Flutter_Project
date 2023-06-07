@@ -18,9 +18,9 @@ serait un plus.
 ### Rendu attendu :
 - Repo Git avec le code source
 - Fichier Readme.md avec :
-- - Version Flutter + version Dart + autres informations utiles
-- - Descriptif des fonctionnalités
-- - Descriptif des API utilisées
+ - Version Flutter + version Dart + autres informations utiles
+ - Descriptif des fonctionnalités
+ - Descriptif des API utilisées
 ### Besoins :
 Saisir les endroits visités : dates, lieux, commentaires, photos, météo, ...
 Voir mes lieux visités
