@@ -18,9 +18,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFFEFEFEF),
         primarySwatch: Colors.amber,
       ),
-      home: DateList(
-        totalDaysInMonth: 30,
-      ),
+      home: const HomePage(),
     );
   }
 }
