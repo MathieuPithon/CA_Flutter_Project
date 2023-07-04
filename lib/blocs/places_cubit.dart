@@ -1,19 +1,41 @@
 import 'dart:developer';
 import 'package:carnet_voyage/blocs/places_state.dart';
+import 'package:carnet_voyage/repositories/places_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../model/place.dart';
 
-class PlaceCubit extends Cubit<PlacesState> {
-  PlaceCubit() : super(PlacesState.loading());
+class PlacesCubit extends Cubit<PlacesState> {
+  PlacesCubit() : super(PlacesState.loading());
+  List<Place> places = [];
 
-  Future<void> loadMovie(int movieId) async {
+  Future<void> loadPlaces() async {
     try {
       emit(PlacesState.loading());
-      Place place = Place(
-          0, "title", "address", ["photoPath"], "commentary", "wheater", 0);
-      // final movie = await tmdbRepository.fetchMovie(movieId);
-      emit(PlacesState.loaded([place]));
+      List<Place> places = await PlacesRepository.loadPlaces();
+      emit(PlacesState.loaded(places));
+    } catch (e) {
+      log(e.toString());
+      emit(PlacesState.error());
+    }
+  }
+
+  Future<void> deletePlace(String id) async {
+    try {
+      await PlacesRepository.deletePlace(id);
+      places.removeWhere((place) => place.id == id);
+      emit(PlacesState.loaded(places));
+    } catch (e) {
+      log(e.toString());
+      emit(PlacesState.error());
+    }
+  }
+
+  Future<void> savePlace(Place place) async {
+    try {
+      emit(PlacesState.loading());
+      places.add(place);
+      await PlacesRepository.savePlace(place);
+      emit(PlacesState.loaded(places));
     } catch (e) {
       log(e.toString());
       emit(PlacesState.error());
