@@ -32,10 +32,17 @@ class _PlacesListPageState extends State<PlacesListPage> {
                   child: ListTile(
                     title: Text(state.places[index].title),
                     subtitle: Text(state.places[index].address),
-                    onTap: () async {
-                      await context
-                          .read<PlacesCubit>()
-                          .deletePlace(state.places[index].id);
+                    onTap: () {
+                      // await context
+                      //     .read<PlacesCubit>()
+                      //     .deletePlace(state.places[index].id);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(
+                            place: state.places[index],
+                          ),
+                        ),
+                      );
                     },
                   ),
                 );
@@ -48,7 +55,7 @@ class _PlacesListPageState extends State<PlacesListPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
+            MaterialPageRoute(builder: (context) => HomePage()),
           );
         },
         child: const Icon(Icons.add),
