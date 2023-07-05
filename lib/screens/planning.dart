@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';  // pour le formatage des dates
 
 class InfiniteScrollCalendar extends StatefulWidget {
-  InfiniteScrollCalendar({Key? key}) : super(key: key);
+  const InfiniteScrollCalendar({Key? key}) : super(key: key);
 
   @override
   _InfiniteScrollCalendarState createState() => _InfiniteScrollCalendarState();
@@ -10,7 +10,7 @@ class InfiniteScrollCalendar extends StatefulWidget {
 
 class _InfiniteScrollCalendarState extends State<InfiniteScrollCalendar> {
   final _controller = ScrollController();
-  DateTime _currentDate = DateTime.now();
+  final DateTime _currentDate = DateTime.now();
   int _currentMonth = DateTime.now().month;
   
   @override
@@ -42,7 +42,7 @@ class _InfiniteScrollCalendarState extends State<InfiniteScrollCalendar> {
 class MonthCard extends StatelessWidget {
   final DateTime date;
 
-  MonthCard(this.date);
+  const MonthCard(this.date, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class MonthCard extends StatelessWidget {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text(formatter.format(date), style: TextStyle(fontSize: 24)),
+        child: Text(formatter.format(date), style: const TextStyle(fontSize: 24)),
       ),
     );
   }
@@ -59,7 +59,7 @@ class MonthCard extends StatelessWidget {
 class DayCard extends StatelessWidget {
   final DateTime date;
 
-  DayCard(this.date);
+  const DayCard(this.date, {super.key});
 
   @override
   Widget build(BuildContext context) {

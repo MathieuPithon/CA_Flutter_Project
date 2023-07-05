@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 import '../model/place.dart';
-import '../repositories/places_repository.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _commentaryController = TextEditingController();
   final TextEditingController _wheaterController = TextEditingController();
   final TextEditingController _ratingController = TextEditingController();
-  var uuid = Uuid();
+  var uuid = const Uuid();
 
   @override
   Widget build(BuildContext context) {
@@ -85,10 +84,10 @@ class _HomePageState extends State<HomePage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => PlacesListPage()),
+            MaterialPageRoute(builder: (context) => const PlacesListPage()),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }

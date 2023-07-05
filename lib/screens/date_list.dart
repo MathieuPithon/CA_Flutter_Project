@@ -5,7 +5,7 @@ class DateList extends StatelessWidget {
   // Le nombre total des jours dans le mois
   final int totalDaysInMonth;
 
-  DateList({required this.totalDaysInMonth});
+  const DateList({super.key, required this.totalDaysInMonth});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,9 @@ class DateList extends StatelessWidget {
                 height: 50.0,
                 child: Center(
                     child: Text(formattedDate,
-                        style: TextStyle(color: Colors.green))),
+                        style: const TextStyle(color: Colors.green))),
               ),
-              Divider(height: 3.0, color: Colors.green),
+              const Divider(height: 3.0, color: Colors.green),
             ],
           );
         },

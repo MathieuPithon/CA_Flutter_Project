@@ -1,4 +1,3 @@
-import 'package:carnet_voyage/screens/home_page.dart';
 import 'package:carnet_voyage/screens/places_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -30,12 +29,14 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFFEFEFEF),
         primarySwatch: Colors.amber,
       ),
-      home: PlacesListPage(),
+      home: const PlacesListPage(),
     );
   }
 }
 
 class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
   _MainScreenState createState() => _MainScreenState();
 }
@@ -44,10 +45,10 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   
   final List<Widget> _children = [
-    Screen1(),
-    Screen2(),
-    Screen3(),
-    Screen4(),
+    const Screen1(),
+    const Screen2(),
+    const Screen3(),
+    const Screen4(),
   ];
 
   void _onItemTapped(int index) {
@@ -60,7 +61,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Mon Application'),
+        title: const Text('Mon Application'),
       ),
       body: _children[_currentIndex],  // affiche le screen actuel
       bottomNavigationBar: BottomNavigationBar(
@@ -93,7 +94,15 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-class Screen1 extends StatefulWidget { HomePage }
-class Screen2 extends StatefulWidget { /* implémentez vos écrans ici */ }
-class Screen3 extends StatefulWidget { /* implémentez vos écrans ici */ }
-class Screen4 extends StatelessWidget { /* implémentez vos écrans ici */ }
+class Screen1 extends StatefulWidget { HomePage 
+
+  const Screen1({super.key});}
+class Screen2 extends StatefulWidget {
+  const Screen2({super.key});
+ /* implémentez vos écrans ici */ }
+class Screen3 extends StatefulWidget {
+  const Screen3({super.key});
+ /* implémentez vos écrans ici */ }
+class Screen4 extends StatelessWidget {
+  const Screen4({super.key});
+ /* implémentez vos écrans ici */ }
