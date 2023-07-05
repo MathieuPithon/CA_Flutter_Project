@@ -67,7 +67,6 @@ class _MainScreenState extends State<MainScreen> {
             icon: Icon(Icons.calendar_month_outlined, color: Colors.amber),
             activeIcon: Icon(Icons.calendar_month, color: Colors.amber),
             label: 'liste des dates',
-            
           ),
         ],
         onTap: _onItemTapped,
