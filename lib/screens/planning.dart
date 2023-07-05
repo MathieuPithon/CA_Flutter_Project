@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';  // pour le formatage des dates
 
-class InfiniteScrollCalendar extends StatefulWidget {
-  const InfiniteScrollCalendar({Key? key}) : super(key: key);
+class PlanningPage extends StatefulWidget {
+  const PlanningPage({Key? key}) : super(key: key);
 
   @override
-  _InfiniteScrollCalendarState createState() => _InfiniteScrollCalendarState();
+  _PlanningPageState createState() => _PlanningPageState();
 }
 
-class _InfiniteScrollCalendarState extends State<InfiniteScrollCalendar> {
+class _PlanningPageState extends State<PlanningPage> {
   final _controller = ScrollController();
   final DateTime _currentDate = DateTime.now();
   int _currentMonth = DateTime.now().month;

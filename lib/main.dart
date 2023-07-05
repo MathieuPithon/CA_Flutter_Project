@@ -1,4 +1,7 @@
+import 'package:carnet_voyage/screens/date_list.dart';
+import 'package:carnet_voyage/screens/home_page.dart';
 import 'package:carnet_voyage/screens/places_list_page.dart';
+import 'package:carnet_voyage/screens/planning.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
@@ -45,10 +48,10 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   
   final List<Widget> _children = [
-    const Screen1(),
-    const Screen2(),
-    const Screen3(),
-    const Screen4(),
+    const HomePage(),
+    const PlacesListPage(),
+    const PlanningPage(),
+    const DateList(totalDaysInMonth: 30,),
   ];
 
   void _onItemTapped(int index) {
@@ -73,18 +76,18 @@ class _MainScreenState extends State<MainScreen> {
             label: 'home_page',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            activeIcon: Icon(Icons.business_filled),
+            icon: Icon(Icons.place_outlined),
+            activeIcon: Icon(Icons.place),
             label: 'places_list_page',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            activeIcon: Icon(Icons.school_filled),
+            icon: Icon(Icons.calendar_view_day_outlined),
+            activeIcon: Icon(Icons.calendar_view_day),
             label: 'planning',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            activeIcon: Icon(Icons.settings_filled),
+            icon: Icon(Icons.calendar_month_outlined),
+            activeIcon: Icon(Icons.calendar_month),
             label: 'date_list',
           ),
         ],
@@ -94,15 +97,3 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-class Screen1 extends StatefulWidget { HomePage 
-
-  const Screen1({super.key});}
-class Screen2 extends StatefulWidget {
-  const Screen2({super.key});
- /* implémentez vos écrans ici */ }
-class Screen3 extends StatefulWidget {
-  const Screen3({super.key});
- /* implémentez vos écrans ici */ }
-class Screen4 extends StatelessWidget {
-  const Screen4({super.key});
- /* implémentez vos écrans ici */ }
