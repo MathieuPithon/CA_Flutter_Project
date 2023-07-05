@@ -88,28 +88,31 @@ class _HomePageState extends State<HomePage> {
                           .read<PlacesCubit>()
                           .editPlace(widget.index!, place)
                       : await context.read<PlacesCubit>().savePlace(place);
-
                   // Clear all fields
                   _titleController.clear();
                   _addressController.clear();
                   _commentaryController.clear();
                   _wheaterController.clear();
                   _ratingController.clear();
+                  Navigator.pop(context);
                 }
               },
               child: const Text('Save Place'),
             ),
+            if (widget.place != null)
+              IconButton(
+                icon: const Icon(Icons.delete), // Icone de la poubelle
+                onPressed: () {
+                  context.read<PlacesCubit>().deletePlace(widget.place!.id);
+                  Navigator.pop(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PlacesListPage()),
+                  );
+                },
+              )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const PlacesListPage()),
-          );
-        },
-        child: const Icon(Icons.add),
       ),
     );
   }

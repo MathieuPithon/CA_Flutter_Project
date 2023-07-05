@@ -11,7 +11,7 @@ class PlacesCubit extends Cubit<PlacesState> {
   Future<void> loadPlaces() async {
     try {
       emit(PlacesState.loading());
-      List<Place> places = await PlacesRepository.loadPlaces();
+      places = await PlacesRepository.loadPlaces();
       emit(PlacesState.loaded(places));
     } catch (e) {
       log(e.toString());
