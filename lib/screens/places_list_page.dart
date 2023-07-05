@@ -6,6 +6,8 @@ import '../model/data_state.dart';
 import 'home_page.dart';
 
 class PlacesListPage extends StatefulWidget {
+  const PlacesListPage({super.key});
+
   @override
   _PlacesListPageState createState() => _PlacesListPageState();
 }
@@ -53,10 +55,10 @@ class _PlacesListPageState extends State<PlacesListPage> {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()),
+            MaterialPageRoute(builder: (context) => const HomePage()),
           );
         },
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
