@@ -3,8 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/places_cubit.dart';
 import '../blocs/places_state.dart';
 import '../model/data_state.dart';
-import '../model/place.dart';
-import '../repositories/places_repository.dart';
 import 'home_page.dart';
 
 class PlacesListPage extends StatefulWidget {
@@ -32,10 +30,17 @@ class _PlacesListPageState extends State<PlacesListPage> {
                   child: ListTile(
                     title: Text(state.places[index].title),
                     subtitle: Text(state.places[index].address),
-                    onTap: () async {
-                      await context
-                          .read<PlacesCubit>()
-                          .deletePlace(state.places[index].id);
+                    onTap: () {
+                      // await context
+                      //     .read<PlacesCubit>()
+                      //     .deletePlace(state.places[index].id);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(
+                            place: state.places[index],
+                          ),
+                        ),
+                      );
                     },
                   ),
                 );

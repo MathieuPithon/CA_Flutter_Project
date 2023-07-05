@@ -4,22 +4,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 import '../model/place.dart';
-import '../repositories/places_repository.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  Place? place;
+
+  HomePage({Key? key, this.place}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _commentaryController = TextEditingController();
-  final TextEditingController _wheaterController = TextEditingController();
-  final TextEditingController _ratingController = TextEditingController();
-  var uuid = Uuid();
+  late TextEditingController _titleController;
+  late TextEditingController _addressController = TextEditingController();
+  late TextEditingController _commentaryController = TextEditingController();
+  late TextEditingController _wheaterController = TextEditingController();
+  late TextEditingController _ratingController = TextEditingController();
+  var uuid = const Uuid();
+
+  @override
+  void initState() {
+    super.initState();
+    _titleController = TextEditingController(text: widget.place?.title ?? "");
+    _addressController =
+        TextEditingController(text: widget.place?.address ?? "");
+    _commentaryController =
+        TextEditingController(text: widget.place?.commentary ?? "");
+    _wheaterController =
+        TextEditingController(text: widget.place?.wheater ?? "");
+    _ratingController =
+        TextEditingController(text: widget.place?.rating.toString() ?? "");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +46,9 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
             TextField(
               controller: _titleController,
-              decoration: const InputDecoration(hintText: 'Enter title'),
+              decoration: const InputDecoration(
+                hintText: 'Enter title',
+              ),
             ),
             TextField(
               controller: _addressController,
@@ -56,7 +73,6 @@ class _HomePageState extends State<HomePage> {
                     _commentaryController.text.isNotEmpty &&
                     _wheaterController.text.isNotEmpty &&
                     _ratingController.text.isNotEmpty) {
-                  
                   Place place = Place(
                       uuid.v1(),
                       _titleController.text,
