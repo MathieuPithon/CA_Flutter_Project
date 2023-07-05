@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'blocs/places_cubit.dart';
 import 'model/place.dart';
 
@@ -27,6 +27,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<PlacesCubit>().loadPlaces();
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('fr'),
+      ],
       title: 'Flutter Demo',
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFEFEFEF),
@@ -46,12 +54,14 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
-  
+
   final List<Widget> _children = [
-     HomePage(),
+    HomePage(),
     const PlacesListPage(),
     const PlanningPage(),
-    const DateList(totalDaysInMonth: 30,),
+    const DateList(
+      totalDaysInMonth: 30,
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -62,18 +72,20 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-     context.read<PlacesCubit>().loadPlaces();
+    context.read<PlacesCubit>().loadPlaces();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Carnet de Voyage'),
       ),
-      body: _children[_currentIndex],  // affiche le screen actuel
+      body: _children[_currentIndex], // affiche le screen actuel
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined, color: Colors.amber,),
-            
+            icon: Icon(
+              Icons.home_outlined,
+              color: Colors.amber,
+            ),
             activeIcon: Icon(Icons.home_filled, color: Colors.amber),
             label: 'home_page',
           ),
@@ -98,4 +110,3 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
-
