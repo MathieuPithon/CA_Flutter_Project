@@ -22,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
     const PlacesListPage(),
     const PlanningPage(),
     const DateList(
-      totalDaysInMonth: 30,
+      totalDaysInMonth: 35,
     ),
   ];
 
