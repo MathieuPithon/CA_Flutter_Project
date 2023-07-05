@@ -72,23 +72,24 @@ class _MainScreenState extends State<MainScreen> {
         currentIndex: _currentIndex,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            activeIcon: Icon(Icons.home_filled),
+            icon: Icon(Icons.home_outlined, color: Colors.amber,),
+            
+            activeIcon: Icon(Icons.home_filled, color: Colors.amber),
             label: 'home_page',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.place_outlined),
-            activeIcon: Icon(Icons.place),
+            icon: Icon(Icons.place_outlined, color: Colors.amber),
+            activeIcon: Icon(Icons.place, color: Colors.amber),
             label: 'places_list_page',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_view_day_outlined),
-            activeIcon: Icon(Icons.calendar_view_day),
+            icon: Icon(Icons.calendar_view_day_outlined, color: Colors.amber),
+            activeIcon: Icon(Icons.calendar_view_day, color: Colors.amber),
             label: 'planning',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month_outlined),
-            activeIcon: Icon(Icons.calendar_month),
+            icon: Icon(Icons.calendar_month_outlined, color: Colors.amber),
+            activeIcon: Icon(Icons.calendar_month, color: Colors.amber),
             label: 'date_list',
           ),
         ],
