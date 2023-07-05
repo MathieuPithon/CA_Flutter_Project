@@ -7,8 +7,9 @@ import '../model/place.dart';
 
 class HomePage extends StatefulWidget {
   Place? place;
+  int? index;
 
-  HomePage({Key? key, this.place}) : super(key: key);
+  HomePage({Key? key, this.place, this.index}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -82,7 +83,11 @@ class _HomePageState extends State<HomePage> {
                       _wheaterController.text,
                       num.parse(_ratingController.text));
 
-                  await context.read<PlacesCubit>().savePlace(place);
+                  widget.place != null
+                      ? context
+                          .read<PlacesCubit>()
+                          .editPlace(widget.index!, place)
+                      : await context.read<PlacesCubit>().savePlace(place);
 
                   // Clear all fields
                   _titleController.clear();
