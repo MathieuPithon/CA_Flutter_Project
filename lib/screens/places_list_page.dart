@@ -40,6 +40,7 @@ class _PlacesListPageState extends State<PlacesListPage> {
                         MaterialPageRoute(
                           builder: (context) => HomePage(
                             place: state.places[index],
+                            index: index,
                           ),
                         ),
                       );
