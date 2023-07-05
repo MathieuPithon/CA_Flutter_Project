@@ -18,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _children = [
-    HomePage(),
+    // HomePage(),
     const PlacesListPage(),
     const PlanningPage(),
     const DateList(
@@ -45,14 +45,14 @@ class _MainScreenState extends State<MainScreen> {
         selectedFontSize: 14,
         currentIndex: _currentIndex,
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home_outlined,
-              color: Colors.amber,
-            ),
-            activeIcon: Icon(Icons.home_filled, color: Colors.amber),
-            label: 'home',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(
+          //     Icons.home_outlined,
+          //     color: Colors.amber,
+          //   ),
+          //   activeIcon: Icon(Icons.home_filled, color: Colors.amber),
+          //   label: 'home',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.place_outlined, color: Colors.amber),
             activeIcon: Icon(Icons.place, color: Colors.amber),
