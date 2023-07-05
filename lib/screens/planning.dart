@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';  // pour le formatage des dates
+import 'package:intl/date_symbol_data_local.dart';
 
 class PlanningPage extends StatefulWidget {
   const PlanningPage({Key? key}) : super(key: key);
@@ -7,6 +8,7 @@ class PlanningPage extends StatefulWidget {
   @override
   _PlanningPageState createState() => _PlanningPageState();
 }
+
 
 class _PlanningPageState extends State<PlanningPage> {
   final _controller = ScrollController();
@@ -46,11 +48,12 @@ class MonthCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = DateFormat('MMMM yyyy');
+    final month = DateFormat.LLLL('fr_FR');
+    final year = DateFormat('yyyy');
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Text(formatter.format(date), style: const TextStyle(fontSize: 24)),
+        child: Text("${month.format(date)} ${year.format(date)}", style: const TextStyle(fontSize: 24)),
       ),
     );
   }
@@ -63,10 +66,13 @@ class DayCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = DateFormat('yyyy-MM-dd');
+    final day = DateFormat.EEEE('fr_FR');
+    final day_number = DateFormat('dd');
+    final month = DateFormat.LLLL('fr_FR');
+    final year = DateFormat('yyyy');
     return Card(
       child: ListTile(
-        title: Text(formatter.format(date)),
+        title: Text("${day.format(date)} ${day_number.format(date)} ${month.format(date)} ${year.format(date)}"),
       ),
     );
   }
