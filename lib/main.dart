@@ -17,7 +17,7 @@ void main() async {
   Hive.registerAdapter(PlaceAdapter());
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (_) => PlacesCubit()),
-  ], child: const MyApp()));
+  ], child: const MainScreen()));
 }
 
 class MyApp extends StatelessWidget {
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFFEFEFEF),
         primarySwatch: Colors.amber,
       ),
-      home: const PlacesListPage(),
+      home: const MainScreen(),
     );
   }
 }
@@ -62,9 +62,10 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+     context.read<PlacesCubit>().loadPlaces();
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Mon Application'),
+        title: const Text('Carnet de Voyage'),
       ),
       body: _children[_currentIndex],  // affiche le screen actuel
       bottomNavigationBar: BottomNavigationBar(
