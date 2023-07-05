@@ -17,7 +17,7 @@ void main() async {
   Hive.registerAdapter(PlaceAdapter());
   runApp(MultiBlocProvider(providers: [
     BlocProvider(create: (_) => PlacesCubit()),
-  ], child: const MainScreen()));
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
