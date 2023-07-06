@@ -24,6 +24,8 @@ class _HomePageState extends State<HomePage> {
   late TextEditingController _ratingController = TextEditingController();
   var uuid = const Uuid();
 
+  DateTime selectedDate = DateTime.now();
+
   @override
   void initState() {
     super.initState();
@@ -68,6 +70,16 @@ class _HomePageState extends State<HomePage> {
               controller: _ratingController,
               decoration: const InputDecoration(hintText: 'Enter rating'),
             ),
+            SizedBox(height: 20),
+            Text(
+              "Selected Date: ${selectedDate.toIso8601String()}",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            ElevatedButton(
+              onPressed: () => _selectDate(context),
+              child: Text('Select date'),
+            ),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
                 if (_titleController.text.isNotEmpty &&
@@ -82,7 +94,9 @@ class _HomePageState extends State<HomePage> {
                       [], // remplacer par une logique appropriée pour gérer les chemins de photo
                       _commentaryController.text,
                       _wheaterController.text,
-                      num.parse(_ratingController.text));
+                      num.parse(_ratingController.text),
+                      selectedDate // Ajout du paramètre de date
+                      );
 
                   widget.place != null
                       ? context
@@ -116,6 +130,19 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate, // Référence à la date sélectionnée
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101),
+    );
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
   }
 
   @override

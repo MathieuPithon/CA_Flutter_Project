@@ -28,6 +28,9 @@ class Place {
   @HiveField(6)
   num rating;
 
+  @HiveField(7)
+  DateTime date;
+
   Place(this.id, this.title, this.address, this.photoPath, this.commentary,
-      this.wheater, this.rating);
+      this.wheater, this.rating, this.date);
 }
