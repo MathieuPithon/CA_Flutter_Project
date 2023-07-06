@@ -61,7 +61,7 @@ class _PlacesListPageState extends State<PlacesListPage> {
                           subtitle: Text(filteredPlaces[index].address),
                           trailing: RatingBarIndicator(
                             rating: filteredPlaces[index].rating.toDouble(),
-                            itemBuilder: (context, index) => Icon(
+                            itemBuilder: (context, index) => const Icon(
                               Icons.star,
                               color: Colors.amber,
                             ),
