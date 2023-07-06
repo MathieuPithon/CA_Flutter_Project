@@ -97,11 +97,8 @@ class _HomePageState extends State<HomePage> {
                       selectedDate);
 
                   widget.place != null
-                      ? context
-                          .read<PlacesCubit>()
-                          .editPlace(place)
+                      ? context.read<PlacesCubit>().editPlace(place)
                       : await context.read<PlacesCubit>().savePlace(place);
-                  // Clear all fields
                   _titleController.clear();
                   _addressController.clear();
                   _commentaryController.clear();
@@ -116,12 +113,11 @@ class _HomePageState extends State<HomePage> {
             ),
             if (widget.place != null)
               IconButton(
-                icon: const Icon(Icons.delete), // Icone de la poubelle
+                icon: const Icon(Icons.delete),
                 onPressed: () {
                   context.read<PlacesCubit>().deletePlace(widget.place!.id);
                   Navigator.pop(
                     context,
-                  
                     MaterialPageRoute(
                         builder: (context) => const PlacesListPage()),
                   );
