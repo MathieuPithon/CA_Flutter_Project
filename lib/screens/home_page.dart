@@ -47,9 +47,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text("Détail de l'évènement")),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextField(
               controller: _titleController,
