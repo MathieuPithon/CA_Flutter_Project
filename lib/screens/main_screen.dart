@@ -1,5 +1,4 @@
 import 'package:carnet_voyage/screens/date_list.dart';
-import 'package:carnet_voyage/screens/home_page.dart';
 import 'package:carnet_voyage/screens/places_list_page.dart';
 import 'package:carnet_voyage/screens/planning.dart';
 import 'package:flutter/material.dart';

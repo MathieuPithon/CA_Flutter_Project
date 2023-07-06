@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 import '../model/place.dart';
 
+// ignore: must_be_immutable
 class HomePage extends StatefulWidget {
   Place? place;
   int? index;
