@@ -5,6 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 import '../model/place.dart';
 import 'package:intl/intl.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
@@ -44,7 +47,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Ajout place")),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Column(
@@ -82,6 +84,15 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
+                onPressed: () {
+                  widget.place != null
+                      ? context
+                          .read<PlacesCubit>()
+                          .saveImage(getImagePath(), widget.place!)
+                      : null;
+                },
+                child: Text("image")),
+            ElevatedButton(
               onPressed: () async {
                 if (_titleController.text != "" &&
                     _addressController.text != "" &&
@@ -101,6 +112,7 @@ class _HomePageState extends State<HomePage> {
                   widget.place != null
                       ? context.read<PlacesCubit>().editPlace(place)
                       : await context.read<PlacesCubit>().savePlace(place);
+
                   _titleController.clear();
                   _addressController.clear();
                   _commentaryController.clear();
@@ -142,6 +154,21 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         selectedDate = picked;
       });
+    }
+  }
+
+  Future<String> getImagePath() async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      final File imageFile = File(pickedFile.path);
+      final directory = await getApplicationDocumentsDirectory();
+      final File newImage = await imageFile
+          .copy('${directory.path}/${DateTime.now().toIso8601String()}.png');
+      return newImage.path;
+    } else {
+      throw Exception('Aucun fichier sélectionné');
     }
   }
 

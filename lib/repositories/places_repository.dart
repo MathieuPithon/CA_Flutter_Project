@@ -35,9 +35,16 @@ class PlacesRepository {
     box.close();
   }
 
-static Future<void> editPlace(Place place) async {
-  var box = await Hive.openBox<Place>('Places');
-  box.put(place.id, place);  // remplace automatiquement la valeur existante
-  box.close();
-}
+  static Future<void> editPlace(Place place) async {
+    var box = await Hive.openBox<Place>('Places');
+    box.put(place.id, place);
+    box.close();
+  }
+
+  static Future<void> saveImage(Place place) async{
+    var box = await Hive.openBox<Place>('Places');
+
+    box.put(place.id, place);
+    box.close();
+  }
 }
