@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';  // pour le formatage des dates
 import 'package:intl/date_symbol_data_local.dart';
 
 import '../blocs/places_cubit.dart';
+import '../blocs/places_state.dart';
 import '../model/place.dart';
 
 class PlanningPage extends StatefulWidget {
