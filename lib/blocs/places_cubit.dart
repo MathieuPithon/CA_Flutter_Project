@@ -47,7 +47,9 @@ class PlacesCubit extends Cubit<PlacesState> {
       emit(PlacesState.loading());
       await PlacesRepository.editPlace(updatedPlace);
       final index = places.indexWhere((place) => place.id == updatedPlace.id);
+      if (index != -1) {
       places[index] = updatedPlace;
+      }
       emit(PlacesState.loaded(places));
     } catch (e) {
       log(e.toString());
