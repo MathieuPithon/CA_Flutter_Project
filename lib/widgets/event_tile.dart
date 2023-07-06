@@ -1,5 +1,7 @@
+import 'package:carnet_voyage/blocs/places_cubit.dart';
 import 'package:carnet_voyage/model/place.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../screens/home_page.dart';
@@ -21,15 +23,18 @@ class EventTile extends StatelessWidget {
                             itemSize: 20.0,
                             direction: Axis.horizontal,
                           ),
-                          onTap: () {
-                            Navigator.of(context).push(
+                          onTap: () async {
+                            final result = await Navigator.push(
+                              context,
                               MaterialPageRoute(
                                 builder: (context) => HomePage(
                                   place: event,
-                                  // index: event.id,
                                 ),
                               ),
                             );
+                            if (result == true) {
+                              context.read<PlacesCubit>().loadPlaces();
+                            }
                           },
                         );
       

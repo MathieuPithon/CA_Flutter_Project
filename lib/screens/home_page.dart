@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                   widget.place != null
                       ? context
                           .read<PlacesCubit>()
-                          .editPlace(widget.index!, place)
+                          .editPlace(place)
                       : await context.read<PlacesCubit>().savePlace(place);
                   // Clear all fields
                   _titleController.clear();
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                   _commentaryController.clear();
                   _wheaterController.clear();
                   _ratingController.clear();
-                  Navigator.pop(context);
+                  Navigator.pop(context, true);
                 } else {
                   null;
                 }
@@ -121,6 +121,7 @@ class _HomePageState extends State<HomePage> {
                   context.read<PlacesCubit>().deletePlace(widget.place!.id);
                   Navigator.pop(
                     context,
+                  
                     MaterialPageRoute(
                         builder: (context) => const PlacesListPage()),
                   );

@@ -5,7 +5,6 @@ import '../blocs/places_state.dart';
 import '../model/data_state.dart';
 import '../widgets/event_tile.dart';
 import 'home_page.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class PlacesListPage extends StatefulWidget {
   const PlacesListPage({Key? key}) : super(key: key);

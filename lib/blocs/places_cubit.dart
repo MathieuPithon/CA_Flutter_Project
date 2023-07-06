@@ -42,11 +42,12 @@ class PlacesCubit extends Cubit<PlacesState> {
     }
   }
 
-  Future<void> editPlace(int index, Place place) async {
+  Future<void> editPlace(Place updatedPlace) async {
     try {
       emit(PlacesState.loading());
-      await PlacesRepository.editPlace(place);
-      places[index] = place;
+      await PlacesRepository.editPlace(updatedPlace);
+      final index = places.indexWhere((place) => place.id == updatedPlace.id);
+      places[index] = updatedPlace;
       emit(PlacesState.loaded(places));
     } catch (e) {
       log(e.toString());
