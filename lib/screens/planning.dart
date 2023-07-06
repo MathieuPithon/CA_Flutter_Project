@@ -77,10 +77,14 @@ class DayCard extends StatelessWidget {
       child: BlocBuilder<PlacesCubit, PlacesState>(
         builder: (context, places) {
           final todaysEvents = context.read<PlacesCubit>().getEventsForDay(date);
+           final hasEvents = todaysEvents.isNotEmpty;
           return Column(
             children: [
-              ListTile(
-                title: Text("${day.format(date)} ${day_number.format(date)} ${month.format(date)} ${year.format(date)}"),
+              ListTile( contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: hasEvents ? 16 : 8),
+                title: Text(
+                  "${day.format(date)} ${day_number.format(date)} ${month.format(date)} ${year.format(date)}",
+                  style: TextStyle(fontSize: hasEvents ? 20 : 14),
+                ),
               ),
               ...todaysEvents.map((place) =>
                Container(
