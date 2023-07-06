@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';  // pour le formatage des dates
 import 'package:intl/date_symbol_data_local.dart';
+
+import '../blocs/places_cubit.dart';
+import '../model/place.dart';
 
 class PlanningPage extends StatefulWidget {
   const PlanningPage({Key? key}) : super(key: key);
@@ -71,8 +75,22 @@ class DayCard extends StatelessWidget {
     final month = DateFormat.LLLL('fr_FR');
     final year = DateFormat('yyyy');
     return Card(
-      child: ListTile(
-        title: Text("${day.format(date)} ${day_number.format(date)} ${month.format(date)} ${year.format(date)}"),
+      child: BlocBuilder<PLacesCubit, List<Place>>(
+        builder: (context, places) {
+          final todaysEvents = context.read<PlacesCubit>().getEventsForDay(date);
+          return Column(
+            children: [
+              ListTile(
+                title: Text("${day.format(date)} ${day_number.format(date)} ${month.format(date)} ${year.format(date)}"),
+              ),
+              ...todaysEvents.map((place) =>
+                ListTile(
+                  title: Text(place.title),
+                )
+              ).toList(),
+            ],
+          );
+        },
       ),
     );
   }
