@@ -56,8 +56,8 @@ class MonthCard extends StatelessWidget {
     final year = DateFormat('yyyy');
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text("${month.format(date)} ${year.format(date)}", style: const TextStyle(fontSize: 24)),
+        padding: const EdgeInsets.all(16.0),
+        child: Text("${month.format(date)} ${year.format(date)}", style: const TextStyle(fontSize: 30)),
       ),
     );
   }
@@ -71,7 +71,7 @@ class DayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final day = DateFormat.EEEE('fr_FR');
-    final day_number = DateFormat('dd');
+    final dayNumber = DateFormat('dd');
     final month = DateFormat.LLLL('fr_FR');
     final year = DateFormat('yyyy');
     return Card(
@@ -81,10 +81,10 @@ class DayCard extends StatelessWidget {
            final hasEvents = todaysEvents.isNotEmpty;
           return Column(
             children: [
-              ListTile( contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: hasEvents ? 16 : 8),
+              ListTile( contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: hasEvents ? 10 : 0),
                 title: Text(
-                  "${day.format(date)} ${day_number.format(date)} ${month.format(date)} ${year.format(date)}",
-                  style: TextStyle(fontSize: hasEvents ? 20 : 14),
+                  "${day.format(date)} ${dayNumber.format(date)} ${month.format(date)} ${year.format(date)}",
+                  style: TextStyle(fontSize: hasEvents ? 25 : 14),
                 ),
               ),
               ...todaysEvents.map((place) =>
