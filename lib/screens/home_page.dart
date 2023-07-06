@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _id = widget.place?.id;
+    _id = widget.place!.id;
     _titleController = TextEditingController(text: widget.place?.title);
     _addressController = TextEditingController(text: widget.place?.address);
     _commentaryController =
