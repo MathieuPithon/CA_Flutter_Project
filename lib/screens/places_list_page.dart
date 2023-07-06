@@ -20,7 +20,6 @@ class _PlacesListPageState extends State<PlacesListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Liste des Places')),
       body: Column(
         children: [
           Padding(
@@ -75,9 +74,7 @@ class _PlacesListPageState extends State<PlacesListPage> {
                   return ListView.builder(
                     itemCount: places.length,
                     itemBuilder: (context, index) {
-                      return Card(
-                        child: EventTile(places[index])
-                      );
+                      return Card(child: EventTile(places[index]));
                     },
                   );
                 }
