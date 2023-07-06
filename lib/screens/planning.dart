@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';  // pour le formatage des dates
 
 import '../blocs/places_cubit.dart';
@@ -89,6 +90,15 @@ class DayCard extends StatelessWidget {
                   ),
                 child: ListTile(
                   title: Text(place.title),
+                  subtitle: Text(place.address),
+                          trailing: RatingBarIndicator(
+                            rating: place.rating.toDouble(),
+                            itemBuilder: (context, index) =>
+                                const Icon(Icons.star, color: Colors.amber),
+                            itemCount: 5,
+                            itemSize: 20.0,
+                            direction: Axis.horizontal,
+                          ),
                 ),
                )
               ).toList(),
