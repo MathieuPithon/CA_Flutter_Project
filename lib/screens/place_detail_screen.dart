@@ -1,5 +1,5 @@
 import 'package:carnet_voyage/blocs/places_cubit.dart';
-import 'package:carnet_voyage/screens/places_list_page.dart';
+import 'package:carnet_voyage/screens/places_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';

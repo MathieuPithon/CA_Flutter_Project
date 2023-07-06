@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import '../screens/home_page.dart';
+import '../screens/place_detail_screen.dart';
 
 class EventTile extends StatelessWidget {
   final Place event;

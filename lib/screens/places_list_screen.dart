@@ -4,7 +4,7 @@ import '../blocs/places_cubit.dart';
 import '../blocs/places_state.dart';
 import '../model/data_state.dart';
 import '../widgets/event_tile.dart';
-import 'home_page.dart';
+import 'place_detail_screen.dart';
 
 class PlacesListPage extends StatefulWidget {
   const PlacesListPage({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
-import 'package:carnet_voyage/screens/date_list.dart';
-import 'package:carnet_voyage/screens/places_list_page.dart';
-import 'package:carnet_voyage/screens/planning.dart';
+import 'package:carnet_voyage/screens/old_date_list_screen.dart';
+import 'package:carnet_voyage/screens/places_list_screen.dart';
+import 'package:carnet_voyage/screens/planning_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
