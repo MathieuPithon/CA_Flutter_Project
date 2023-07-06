@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 import '../model/place.dart';
+import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatefulWidget {
@@ -29,15 +30,13 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _titleController = TextEditingController(text: widget.place?.title ?? "");
-    _addressController =
-        TextEditingController(text: widget.place?.address ?? "");
+    _titleController = TextEditingController(text: widget.place?.title);
+    _addressController = TextEditingController(text: widget.place?.address);
     _commentaryController =
-        TextEditingController(text: widget.place?.commentary ?? "");
-    _wheaterController =
-        TextEditingController(text: widget.place?.wheater ?? "");
+        TextEditingController(text: widget.place?.commentary);
+    _wheaterController = TextEditingController(text: widget.place?.wheater);
     _ratingController =
-        TextEditingController(text: widget.place?.rating.toString() ?? "");
+        TextEditingController(text: widget.place?.rating.toString());
   }
 
   @override
@@ -70,33 +69,32 @@ class _HomePageState extends State<HomePage> {
               controller: _ratingController,
               decoration: const InputDecoration(hintText: 'Enter rating'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
-              "Selected Date: ${selectedDate.toIso8601String()}",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              "Date:${DateFormat('dd-MM-yyyy').format(selectedDate)}",
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             ElevatedButton(
               onPressed: () => _selectDate(context),
-              child: Text('Select date'),
+              child: const Text('Choisir une date'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                if (_titleController.text.isNotEmpty &&
-                    _addressController.text.isNotEmpty &&
-                    _commentaryController.text.isNotEmpty &&
-                    _wheaterController.text.isNotEmpty &&
-                    _ratingController.text.isNotEmpty) {
+                if (_titleController.text != "" &&
+                    _addressController.text != "" &&
+                    _commentaryController.text != "" &&
+                    _wheaterController.text != "" &&
+                    _ratingController.text != "") {
                   Place place = Place(
                       uuid.v1(),
                       _titleController.text,
                       _addressController.text,
-                      [], // remplacer par une logique appropriée pour gérer les chemins de photo
+                      [],
                       _commentaryController.text,
                       _wheaterController.text,
                       num.parse(_ratingController.text),
-                      selectedDate // Ajout du paramètre de date
-                      );
+                      selectedDate);
 
                   widget.place != null
                       ? context
@@ -110,6 +108,8 @@ class _HomePageState extends State<HomePage> {
                   _wheaterController.clear();
                   _ratingController.clear();
                   Navigator.pop(context);
+                } else {
+                  null;
                 }
               },
               child: const Text('Save Place'),
@@ -135,14 +135,15 @@ class _HomePageState extends State<HomePage> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: selectedDate, // Référence à la date sélectionnée
+      initialDate: selectedDate,
       firstDate: DateTime(2015, 8),
       lastDate: DateTime(2101),
     );
-    if (picked != null && picked != selectedDate)
+    if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
       });
+    }
   }
 
   @override

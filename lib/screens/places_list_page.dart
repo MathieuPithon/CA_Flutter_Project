@@ -7,7 +7,7 @@ import 'home_page.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class PlacesListPage extends StatefulWidget {
-  const PlacesListPage({super.key});
+  const PlacesListPage({Key? key}) : super(key: key);
 
   @override
   _PlacesListPageState createState() => _PlacesListPageState();
@@ -15,17 +15,7 @@ class PlacesListPage extends StatefulWidget {
 
 class _PlacesListPageState extends State<PlacesListPage> {
   TextEditingController _searchController = TextEditingController();
-  String filter = "";
-
-  @override
-  void initState() {
-    super.initState();
-    _searchController.addListener(() {
-      setState(() {
-        filter = _searchController.text;
-      });
-    });
-  }
+  int _sortOption = 0; // 0 = date, 1 = rating, 2 = alphabétique
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +24,30 @@ class _PlacesListPageState extends State<PlacesListPage> {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10.0),
             child: TextField(
               controller: _searchController,
-              decoration: InputDecoration(labelText: 'Rechercher'),
+              decoration: const InputDecoration(
+                hintText: 'Chercher par nom...',
+                prefixIcon: Icon(Icons.search),
+              ),
+              onChanged: (value) {
+                setState(() {});
+              },
             ),
+          ),
+          DropdownButton(
+            value: _sortOption,
+            items: const [
+              DropdownMenuItem(child: Text("Date"), value: 0),
+              DropdownMenuItem(child: Text("Rating"), value: 1),
+              DropdownMenuItem(child: Text("Alphabétique"), value: 2),
+            ],
+            onChanged: (int? newValue) {
+              setState(() {
+                _sortOption = newValue!;
+              });
+            },
           ),
           Expanded(
             child: BlocBuilder<PlacesCubit, PlacesState>(
@@ -49,36 +58,45 @@ class _PlacesListPageState extends State<PlacesListPage> {
                   return const Center(
                       child: Text('Erreur lors du chargement des données'));
                 } else {
-                  var filteredPlaces = state.places
-                      .where((place) => place.title.contains(filter))
+                  var places = state.places
+                      .where((place) => place.title
+                          .toLowerCase()
+                          .contains(_searchController.text.toLowerCase()))
                       .toList();
+
+                  if (_sortOption == 0) {
+                    places.sort((a, b) => a.date.compareTo(b.date));
+                  } else if (_sortOption == 1) {
+                    places.sort((a, b) => b.rating.compareTo(a.rating));
+                  } else if (_sortOption == 2) {
+                    places.sort((a, b) => a.title.compareTo(b.title));
+                  }
+
                   return ListView.builder(
-                    itemCount: filteredPlaces.length,
+                    itemCount: places.length,
                     itemBuilder: (context, index) {
                       return Card(
                         child: ListTile(
-                          title: Text(filteredPlaces[index].title),
-                          subtitle: Text(filteredPlaces[index].address),
+                          title: Text(places[index].title),
+                          subtitle: Text(places[index].address),
                           trailing: RatingBarIndicator(
-                            rating: filteredPlaces[index].rating.toDouble(),
-                            itemBuilder: (context, index) => const Icon(
-                              Icons.star,
-                              color: Colors.amber,
-                            ),
+                            rating: places[index].rating.toDouble(),
+                            itemBuilder: (context, index) =>
+                                const Icon(Icons.star, color: Colors.amber),
                             itemCount: 5,
                             itemSize: 20.0,
                             direction: Axis.horizontal,
                           ),
                           onTap: () {
+                            _searchController.clear();
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) => HomePage(
-                                  place: filteredPlaces[index],
+                                  place: places[index],
                                   index: index,
                                 ),
                               ),
                             );
-                            _searchController.clear();
                           },
                         ),
                       );
@@ -100,11 +118,5 @@ class _PlacesListPageState extends State<PlacesListPage> {
         child: const Icon(Icons.add),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _searchController.dispose();
-    super.dispose();
   }
 }
