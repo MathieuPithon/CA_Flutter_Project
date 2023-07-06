@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late String _id;
+  late String? _id;
   late TextEditingController _titleController;
   late TextEditingController _addressController = TextEditingController();
   late TextEditingController _commentaryController = TextEditingController();
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _id = widget.place!.id;
+    _id = widget.place?.id;
     _titleController = TextEditingController(text: widget.place?.title);
     _addressController = TextEditingController(text: widget.place?.address);
     _commentaryController =
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                     _wheaterController.text != "" &&
                     _ratingController.text != "") {
                   Place place = Place(
-                      _id,
+                      _id != null? _id.toString() : uuid.v1(),
                       _titleController.text,
                       _addressController.text,
                       [],
