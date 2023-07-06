@@ -71,8 +71,22 @@ class DayCard extends StatelessWidget {
     final month = DateFormat.LLLL('fr_FR');
     final year = DateFormat('yyyy');
     return Card(
-      child: ListTile(
-        title: Text("${day.format(date)} ${day_number.format(date)} ${month.format(date)} ${year.format(date)}"),
+      child: BlocBuilder<PLaceCubit, List<Place>>(
+        builder: (context, places) {
+          final todaysEvents = context.read<PlaceCubit>().getEventsForDay(date);
+          return Column(
+            children: [
+              ListTile(
+                title: Text("${day.format(date)} ${day_number.format(date)} ${month.format(date)} ${year.format(date)}"),
+              ),
+              ...todaysEvents.map((place) =>
+                ListTile(
+                  title: Text(place.title),
+                )
+              ).toList(),
+            ],
+          );
+        },
       ),
     );
   }
