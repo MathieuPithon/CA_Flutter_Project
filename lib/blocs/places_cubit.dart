@@ -45,19 +45,20 @@ class PlacesCubit extends Cubit<PlacesState> {
   Future<void> editPlace(int index, Place place) async {
     try {
       emit(PlacesState.loading());
-      await PlacesRepository.editPlace(place);
       places[index] = place;
+      await PlacesRepository.editPlace(place);
       emit(PlacesState.loaded(places));
     } catch (e) {
       log(e.toString());
       emit(PlacesState.error());
     }
   }
-  
-List<Place> getEventsForDay(DateTime day) {
-  return state.places.where((place) =>
-      DateTime(place.date.year, place.date.month, place.date.day) ==
-      DateTime(day.year, day.month, day.day)).toList();
-}
 
+  List<Place> getEventsForDay(DateTime day) {
+    return state.places
+        .where((place) =>
+            DateTime(place.date.year, place.date.month, place.date.day) ==
+            DateTime(day.year, day.month, day.day))
+        .toList();
+  }
 }
