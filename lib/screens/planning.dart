@@ -84,6 +84,10 @@ class DayCard extends StatelessWidget {
                 title: Text("${day.format(date)} ${day_number.format(date)} ${month.format(date)} ${year.format(date)}"),
               ),
               ...todaysEvents.map((place) =>
+               Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey), // Bordure
+                  ),
                 ListTile(
                   title: Text(place.title),
                 )
