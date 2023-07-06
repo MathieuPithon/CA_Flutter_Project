@@ -4,6 +4,7 @@ import '../blocs/places_cubit.dart';
 import '../blocs/places_state.dart';
 import '../model/data_state.dart';
 import 'home_page.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class PlacesListPage extends StatefulWidget {
   const PlacesListPage({super.key});
@@ -58,6 +59,16 @@ class _PlacesListPageState extends State<PlacesListPage> {
                         child: ListTile(
                           title: Text(filteredPlaces[index].title),
                           subtitle: Text(filteredPlaces[index].address),
+                          trailing: RatingBarIndicator(
+                            rating: filteredPlaces[index].rating.toDouble(),
+                            itemBuilder: (context, index) => Icon(
+                              Icons.star,
+                              color: Colors.amber,
+                            ),
+                            itemCount: 5,
+                            itemSize: 20.0,
+                            direction: Axis.horizontal,
+                          ),
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
