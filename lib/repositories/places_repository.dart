@@ -41,4 +41,11 @@ class PlacesRepository {
     box.put(place.id, place);
     box.close();
   }
+
+  static Future<void> saveImage(Place place) async{
+    var box = await Hive.openBox<Place>('Places');
+
+    box.put(place.id, place);
+    box.close();
+  }
 }

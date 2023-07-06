@@ -62,4 +62,18 @@ class PlacesCubit extends Cubit<PlacesState> {
             DateTime(day.year, day.month, day.day))
         .toList();
   }
+
+  Future<void> saveImage(Future<String> path, Place pipo) async {
+    try {
+      emit(PlacesState.loading());
+      final index = places.indexWhere((place) => place.id == pipo.id);
+      String pathNoFutur = await path;
+      places[index].photoPath.add(pathNoFutur);
+      await PlacesRepository.editPlace(places[index]);
+      emit(PlacesState.loaded(places));
+    } catch (e) {
+      log(e.toString());
+      emit(PlacesState.error());
+    }
+  }
 }
