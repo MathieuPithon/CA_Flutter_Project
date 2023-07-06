@@ -87,9 +87,10 @@ class DayCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey), // Bordure
                   ),
-                ListTile(
+                child: ListTile(
                   title: Text(place.title),
-                )
+                ),
+               )
               ).toList(),
             ],
           );
