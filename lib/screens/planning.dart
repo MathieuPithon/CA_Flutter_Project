@@ -75,7 +75,7 @@ class DayCard extends StatelessWidget {
     final month = DateFormat.LLLL('fr_FR');
     final year = DateFormat('yyyy');
     return Card(
-      child: BlocBuilder<PLacesCubit, List<Place>>(
+      child: BlocBuilder<PlacesCubit, PlacesState>(
         builder: (context, places) {
           final todaysEvents = context.read<PlacesCubit>().getEventsForDay(date);
           return Column(
