@@ -35,10 +35,9 @@ class PlacesRepository {
     box.close();
   }
 
-  static Future<void> editPlace(Place place) async {
-    var box = await Hive.openBox<Place>('Places');
-    box.delete(place.id);
-    box.put(place.id, place);
-    box.close();
-  }
+static Future<void> editPlace(Place place) async {
+  var box = await Hive.openBox<Place>('Places');
+  box.put(place.id, place);  // Ceci remplace automatiquement la valeur existante
+  box.close();
+}
 }
