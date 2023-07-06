@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/places_cubit.dart';
 import '../blocs/places_state.dart';
 import '../model/data_state.dart';
+import '../widgets/event_tile.dart';
 import 'home_page.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -76,29 +77,7 @@ class _PlacesListPageState extends State<PlacesListPage> {
                     itemCount: places.length,
                     itemBuilder: (context, index) {
                       return Card(
-                        child: ListTile(
-                          title: Text(places[index].title),
-                          subtitle: Text(places[index].address),
-                          trailing: RatingBarIndicator(
-                            rating: places[index].rating.toDouble(),
-                            itemBuilder: (context, index) =>
-                                const Icon(Icons.star, color: Colors.amber),
-                            itemCount: 5,
-                            itemSize: 20.0,
-                            direction: Axis.horizontal,
-                          ),
-                          onTap: () {
-                            _searchController.clear();
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => HomePage(
-                                  place: places[index],
-                                  index: index,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                        child: EventTile(places[index])
                       );
                     },
                   );

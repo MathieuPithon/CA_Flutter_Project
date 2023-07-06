@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';  // pour le formatage des dates
-import 'package:intl/date_symbol_data_local.dart';
 
 import '../blocs/places_cubit.dart';
 import '../blocs/places_state.dart';
-import '../model/place.dart';
+import '../widgets/event_tile.dart';
 
 class PlanningPage extends StatefulWidget {
   const PlanningPage({Key? key}) : super(key: key);
@@ -57,8 +57,8 @@ class MonthCard extends StatelessWidget {
     final year = DateFormat('yyyy');
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text("${month.format(date)} ${year.format(date)}", style: const TextStyle(fontSize: 24)),
+        padding: const EdgeInsets.all(16.0),
+        child: Text("${month.format(date)} ${year.format(date)}", style: const TextStyle(fontSize: 30)),
       ),
     );
   }
@@ -72,22 +72,29 @@ class DayCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final day = DateFormat.EEEE('fr_FR');
-    final day_number = DateFormat('dd');
+    final dayNumber = DateFormat('dd');
     final month = DateFormat.LLLL('fr_FR');
     final year = DateFormat('yyyy');
     return Card(
       child: BlocBuilder<PlacesCubit, PlacesState>(
         builder: (context, places) {
           final todaysEvents = context.read<PlacesCubit>().getEventsForDay(date);
+           final hasEvents = todaysEvents.isNotEmpty;
           return Column(
             children: [
-              ListTile(
-                title: Text("${day.format(date)} ${day_number.format(date)} ${month.format(date)} ${year.format(date)}"),
+              ListTile( contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: hasEvents ? 10 : 0),
+                title: Text(
+                  "${day.format(date)} ${dayNumber.format(date)} ${month.format(date)} ${year.format(date)}",
+                  style: TextStyle(fontSize: hasEvents ? 25 : 14),
+                ),
               ),
               ...todaysEvents.map((place) =>
-                ListTile(
-                  title: Text(place.title),
-                )
+               Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey), // Bordure
+                  ),
+                child: EventTile(place),
+               )
               ).toList(),
             ],
           );
