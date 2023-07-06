@@ -55,7 +55,7 @@ class PlacesCubit extends Cubit<PlacesState> {
   }
   
 List<Place> getEventsForDay(DateTime day) {
-  return state.placesList.where((place) =>
+  return state.places.where((place) =>
       DateTime(place.date.year, place.date.month, place.date.day) ==
       DateTime(day.year, day.month, day.day)).toList();
 }
