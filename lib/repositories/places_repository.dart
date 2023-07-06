@@ -37,7 +37,6 @@ class PlacesRepository {
 
   static Future<void> editPlace(Place place) async {
     var box = await Hive.openBox<Place>('Places');
-    box.delete(place.id);
     box.put(place.id, place);
     box.close();
   }
